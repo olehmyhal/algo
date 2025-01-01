@@ -1,4 +1,13 @@
-package lec18stackqueue
+package tasks
+
+import (
+	"bufio"
+	"fmt"
+	"math"
+	"os"
+	"strconv"
+	"strings"
+)
 
 type ArrayQueue struct {
 	queue []int
@@ -49,6 +58,10 @@ func (a *ArrayQueue) Size()int{
 	return a.tail - a.head
 }
 
+func (a *ArrayQueue) GetFirst()int{
+	return a.queue[a.head]
+}
+
 func (a *ArrayQueue) Reserve(cap int){
 	newQueue := make([]int, cap, cap)
 
@@ -60,4 +73,40 @@ func (a *ArrayQueue) Reserve(cap int){
 	a.capacity = cap
 	a.head = 0
 	a.tail = a.n
+}
+
+func bruh(){
+	reader := bufio.NewReader(os.Stdin)
+	
+
+	input, _ := reader.ReadString('\n')
+
+	input = strings.TrimSpace(input)
+
+	tokens := strings.Split(input, " ")
+
+	var numbers []int
+	for _, token := range tokens {
+		num, _ := strconv.Atoi(token)
+		numbers = append(numbers, num)
+	}
+
+	q := ArrayQueue{}
+	q.Init()
+
+	res := []int{}
+	
+	for _, num := range numbers {
+		q.Enqueue(num)
+
+		for 3000 < int(math.Abs(float64(q.GetFirst() - num))) {
+			q.Dequeue()
+		}
+
+		res = append(res, q.Size())
+	}
+
+	for _, r := range res {
+		fmt.Printf("%v ", r)
+	}
 }
