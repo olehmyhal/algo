@@ -16,7 +16,7 @@ func (a *ArrayStack) Push(x int) {
 		a.resize(a.capacity * 2)
 	}
 
-	a.stack[a.size] = x
+	a.stack = append(a.stack, x)
 	a.size += 1
 }
 
@@ -30,7 +30,7 @@ func (a *ArrayStack) Pop() {
 }
 
 func (a *ArrayStack) resize(cap int) {
-	newStack := make([]int, cap, cap)
+	newStack := make([]int, a.size, cap)
 
 	for i, item := range a.stack {
 		newStack[i] = item
