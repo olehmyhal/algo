@@ -20,7 +20,7 @@ func bruh4(){
 
 	sortedByCoordinates := sort2(points)
 
-	sortedPoints := sort(sortedByCoordinates)
+	sortedPoints := sort3(sortedByCoordinates)
 
 	for _, coord := range sortedPoints[:k] {
 		fmt.Printf("%v %v\n", coord[0], coord[1])
@@ -28,7 +28,7 @@ func bruh4(){
 
 }
 
-func sort(arr [][2]int)[][2]int{
+func sort3(arr [][2]int)[][2]int{
 	merge_sort(0, len(arr), arr)
 
 	return arr
